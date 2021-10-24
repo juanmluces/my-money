@@ -1,3 +1,19 @@
 <ion-content>
-
+ <ion-list>
+    <ion-item>
+      <ion-label>
+        {{'settings.darkMode' |translate}}
+      </ion-label>
+      <ion-toggle slot="end" [(ngModel)]="darkMode" (ionChange)="changeMode()"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        {{'settings.changeLang' | translate}}
+      </ion-label>
+    <ion-select [value]="selectedLang" (ionChange)="changeLang($event)" [placeholder]="'settings.selectLang' | translate" okText="Ok" [cancelText]="'settings.cancel' | translate">
+      <ion-select-option value="es">{{'settings.spanish' |translate}}</ion-select-option>
+      <ion-select-option value="en">{{'settings.english' |translate}}</ion-select-option>
+    </ion-select>
+    </ion-item>
+  </ion-list>
 </ion-content>

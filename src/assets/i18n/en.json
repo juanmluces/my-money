@@ -14,7 +14,7 @@
         "title": "Details"
 
     },
-    "tab-settings": {
+    "settings": {
         "settings": "Settings",
         "darkMode": "Dark Mode",
         "showFavGender": "Show Favorite by genres",

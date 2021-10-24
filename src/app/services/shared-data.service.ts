@@ -7,7 +7,8 @@ import { Observable, Subject } from 'rxjs';
 export class SharedDataService {
 
   private tabTitle: string = '';
-  private tabTitleSub$ = new Subject<string>()
+  private tabTitleSub$ = new Subject<string>();
+  private backButtonEvent$ = new Subject<boolean>();
 
   constructor() { }
 
@@ -22,5 +23,14 @@ export class SharedDataService {
   setTabTitle(title: string){
     this.tabTitle = title;
     this.tabTitleSub$.next(title);
+  }
+
+  backButtonPressed(press:boolean){
+    this.backButtonEvent$.next(press)
+  }
+
+  
+  backButton$(): Observable<boolean>{
+    return this.backButtonEvent$.asObservable()
   }
 }

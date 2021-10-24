@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedDataService } from './services/shared-data.service';
 
@@ -14,9 +16,13 @@ export class AppComponent implements OnInit{
 
   constructor(
     private translate: TranslateService,
-    private sharedData: SharedDataService
+    private sharedData: SharedDataService,
+    private platform: Platform,
+    private router: Router,
+    public alertController: AlertController
   ) {
     this.translate.setDefaultLang('es')
+    this.translate.use(this.translate.defaultLang)
     this.tabTitle =  sharedData.getTabTitle()
   }
 
@@ -24,4 +30,56 @@ export class AppComponent implements OnInit{
     this.sharedData.tabTitle$().subscribe(title => this.tabTitle = title)
 
   }
+
+  async initializeApp() {
+
+  this.platform.backButton.subscribeWithPriority(0, async () => {
+    
+    this.sharedData.backButtonPressed(true)
+    setTimeout(()=>{this.sharedData.backButtonPressed(false)}, 0)
+    const url = this.router.url
+  
+      if(url == "tabs/home"){
+        await this.presentAlertConfirm()
+      } else{
+        await this.router.navigate(['tabs', 'home'])
+      }
+      
+    
+    // console.log('this.router.url', this.router.url);
+    
+  
+   
+ });
+}
+
+async presentAlertConfirm() {
+
+  const exitTrans = await this.translate.get('closeApp.exit').toPromise()
+  const exitQuestionTrans = await this.translate.get('closeApp.exitApp').toPromise()
+  const cacelTrans = await this.translate.get('closeApp.cancel').toPromise()
+
+  const alert = await this.alertController.create({
+    header: exitTrans,
+    message: exitQuestionTrans,
+    buttons: [
+      {
+        text: cacelTrans,
+        role: 'cancel',
+        cssClass: 'secondary',
+      }, {
+        text: exitTrans,
+        cssClass: 'exit-button',
+        handler: () => {
+          console.log('Confirm Okay');
+          navigator['app'].exitApp();
+        }
+      }
+    ]
+  });
+
+  await alert.present();
+}
+
+
 }
