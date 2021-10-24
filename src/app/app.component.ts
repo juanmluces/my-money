@@ -21,9 +21,10 @@ export class AppComponent implements OnInit{
     private router: Router,
     public alertController: AlertController
   ) {
-    this.translate.setDefaultLang('es')
-    this.translate.use(this.translate.defaultLang)
-    this.tabTitle =  sharedData.getTabTitle()
+    this.initializeApp();
+    this.translate.setDefaultLang('es');
+    this.translate.use(this.translate.defaultLang);
+    this.tabTitle =  sharedData.getTabTitle();
   }
 
   async ngOnInit(){
@@ -33,25 +34,18 @@ export class AppComponent implements OnInit{
 
   async initializeApp() {
 
-  this.platform.backButton.subscribeWithPriority(0, async () => {
+    this.platform.backButton.subscribeWithPriority(0, async () => {
     
     this.sharedData.backButtonPressed(true)
     setTimeout(()=>{this.sharedData.backButtonPressed(false)}, 0)
-    const url = this.router.url
-  
-      if(url == "tabs/home"){
+    const url = this.router.url    
+      if(url == "/tabs/home"){
         await this.presentAlertConfirm()
       } else{
         await this.router.navigate(['tabs', 'home'])
       }
-      
-    
-    // console.log('this.router.url', this.router.url);
-    
-  
-   
- });
-}
+    });
+  }
 
 async presentAlertConfirm() {
 
