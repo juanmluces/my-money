@@ -1,0 +1,47 @@
+{
+    "menu": {
+        "home": "Inicio",
+        "settings": "Ajustes",
+        "about": "Información"
+    },
+    "home": {
+        "title": "Inicio"
+    },
+    "money":{
+        "title": "Gestionar"
+    },
+    "detail": {
+        "title": "Detalles"
+        
+    },
+    "detalle": {
+        "rating": "Rating",
+        "votes": "Votos",
+        "readMore": "Leer mas!",
+        "director": "Director",
+        "actors": "Actores",
+        "goBack": "Volver",
+        "favorite": "Favorita",
+        "viewTrailer": "Ver Trailer"
+    },
+    "settings": {
+        "title": "Ajustes",
+        "darkMode": "Modo Oscuro",
+        "showFavGender": "Mostrar favoritos por género",
+        "changeLang": "Cambiar Idioma",
+        "spanish": "Español",
+        "english": "Inglés",
+        "selectLang":"Elige un idioma",
+        "cancel": "Cacelar"
+    },
+    "about": {
+        "appInfo": "Aplicación",
+        "databaseInfo": "Base de datos API",
+        "developerInfo": "Desarrollador"
+    },
+    "closeApp": {
+        "exit": "Salir",
+        "cancel": "Cancelar",
+        "exitApp": "¿Deseas salir?"
+    }
+}

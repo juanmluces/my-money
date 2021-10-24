@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  appVersion: "0.1",
+  ionicVersion: "6.17.1",
+  angularVersion: "12.1.4"
 };
 
 /*

@@ -1,0 +1,43 @@
+{
+    "menu": {
+        "home": "Home",
+        "settings": "Settings",
+        "about": "About"
+    },
+    "home": {
+        "title": "Home"
+    },
+    "money":{
+        "title": "Manage"
+    },
+    "detail": {
+        "title": "Details"
+
+    },
+    "tab-settings": {
+        "settings": "Settings",
+        "darkMode": "Dark Mode",
+        "showFavGender": "Show Favorite by genres",
+        "changeLang": "Change language",
+        "spanish": "Spanish",
+        "english": "English",
+        "selectLang":"Select language",
+        "cancel": "Cancel"
+    },
+    "tab-about": {
+        "appInfo": "App Info",
+        "databaseInfo": "Database API",
+        "developerInfo": "Developer"
+    },
+    "closeApp": {
+        "exit": "Exit",
+        "cancel": "Cancel",
+        "exitApp": "Exit App?"
+    },
+    "notification":{
+        "update": "Update",
+        "newVersion": "New version",
+        "notNow": "Not now",
+        "newUpdate": "New Update ⭐"
+    }
+}

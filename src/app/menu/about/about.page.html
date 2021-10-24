@@ -1,0 +1,58 @@
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      {{'about.appInfo'| translate}}
+    </ion-list-header>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="assets/solo-logo-color.svg">
+      </ion-avatar>
+      <ion-label>My Money v{{appVersion}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="assets/ionic.png">
+      </ion-avatar>
+      <ion-label>Ionic v{{ionicVersion}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="assets/angular.png">
+      </ion-avatar>
+      <ion-label>Angular v{{angularVersion}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      {{'about.developerInfo'| translate}}
+    </ion-list-header>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="assets/solo-logo-color.svg">
+      </ion-avatar>
+      <ion-label>Johnny M. Lights</ion-label>
+    </ion-item>
+    <ion-item (click)="navigateWeb('https://www.codinglights.com')">
+      <ion-chip color="primary">
+        <ion-icon name="globe-outline" ></ion-icon>
+        <ion-label >www.codinglights.com</ion-label>
+      </ion-chip>
+    </ion-item>
+    <ion-item (click)="navigateWeb('')">
+      <ion-chip color="primary">
+        <ion-icon name="logo-google-playstore" ></ion-icon>
+        <ion-label >Play Store</ion-label>
+      </ion-chip>
+    </ion-item>
+    <ion-item (click)="navigateWeb('https://www.linkedin.com/in/juanmiguelluces/')">
+      <ion-chip color="primary">
+        <ion-icon name="logo-linkedin"></ion-icon>
+        <ion-label >Linkedin</ion-label>
+      </ion-chip>
+    </ion-item>
+    
+  
+
+  </ion-list>
+</ion-content>
