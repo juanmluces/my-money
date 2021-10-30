@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from './services/local-storage.service';
 import { SharedDataService } from './services/shared-data.service';
 
 @Component({
@@ -19,11 +20,11 @@ export class AppComponent implements OnInit{
     private sharedData: SharedDataService,
     private platform: Platform,
     private router: Router,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private stroage: LocalStorageService
   ) {
     this.initializeApp();
     this.translate.setDefaultLang('es');
-    this.translate.use(this.translate.defaultLang);
     this.tabTitle =  sharedData.getTabTitle();
   }
 
@@ -33,6 +34,10 @@ export class AppComponent implements OnInit{
   }
 
   async initializeApp() {
+
+    this.changeDarkMode();
+    const lang = await this.stroage.get('lang') || this.translate.getDefaultLang()
+    this.translate.use(lang)
 
     this.platform.backButton.subscribeWithPriority(0, async () => {
     
@@ -47,33 +52,41 @@ export class AppComponent implements OnInit{
     });
   }
 
-async presentAlertConfirm() {
+  async presentAlertConfirm() {
 
-  const exitTrans = await this.translate.get('closeApp.exit').toPromise()
-  const exitQuestionTrans = await this.translate.get('closeApp.exitApp').toPromise()
-  const cacelTrans = await this.translate.get('closeApp.cancel').toPromise()
+    const exitTrans = await this.translate.get('closeApp.exit').toPromise()
+    const exitQuestionTrans = await this.translate.get('closeApp.exitApp').toPromise()
+    const cacelTrans = await this.translate.get('closeApp.cancel').toPromise()
 
-  const alert = await this.alertController.create({
-    header: exitTrans,
-    message: exitQuestionTrans,
-    buttons: [
-      {
-        text: cacelTrans,
-        role: 'cancel',
-        cssClass: 'secondary',
-      }, {
-        text: exitTrans,
-        cssClass: 'exit-button',
-        handler: () => {
-          console.log('Confirm Okay');
-          navigator['app'].exitApp();
+    const alert = await this.alertController.create({
+      header: exitTrans,
+      message: exitQuestionTrans,
+      buttons: [
+        {
+          text: cacelTrans,
+          role: 'cancel',
+          cssClass: 'secondary',
+        }, {
+          text: exitTrans,
+          cssClass: 'exit-button',
+          handler: () => {
+            console.log('Confirm Okay');
+            navigator['app'].exitApp();
+          }
         }
-      }
-    ]
-  });
+      ]
+    });
 
-  await alert.present();
-}
+    await alert.present();
+  }
+
+  async changeDarkMode(){
+
+    const darkMode = await this.stroage.get('darkMode') ?? true
+    document.body.classList.add(darkMode ? 'dark' : 'light')
+    this.stroage.set('darkMode', darkMode)
+
+  }
 
 
 }

@@ -1,3 +1,15 @@
 <ion-content>
+	<div class="card-container">
+		<h3>{{ formatedDate | titlecase }}</h3>
+  	<ion-card>
+      <ion-item>
+        <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+    		<ion-label>{{ 'No tienes un ciclo activo' | translate }}</ion-label>
+    	</ion-item>
+  	</ion-card>
+		<ion-button (click)="tabNav('money', {newCicle: true})" expand="block" fill="clear" shape="round">
+			Empezar Ciclo
+		</ion-button>
+  </div>
 
 </ion-content>

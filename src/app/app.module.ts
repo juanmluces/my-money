@@ -9,6 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { IonicStorageModule } from '@ionic/storage-angular';
+import { Drivers } from '@ionic/storage';
+import * as cordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +21,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
     IonicModule.forRoot(), 
     AppRoutingModule,
     HttpClientModule,
+    IonicStorageModule.forRoot({driverOrder: [cordovaSQLiteDriver._driver, Drivers.IndexedDB]}), 
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
