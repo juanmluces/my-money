@@ -1,9 +1,23 @@
+.date-time{
+    height: 4rem;
+}
+
 div.card-container{
     display: flex;
-    height: 100%;
+    height: calc(100% - 8rem);
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    & ion-item{
+        & .no-active-cycle{
+            text-align: center;
+        }
+        & .item-right-margin{
+            width: 2rem;
+            height: 2rem;
+            margin-left: 32px;
+        }
+    }
     & ion-card {
         width: calc(100% - 20px);
     }

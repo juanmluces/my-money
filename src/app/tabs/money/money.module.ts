@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { MoneyPageRoutingModule } from './money-routing.module';
 
 import { MoneyPage } from './money.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MoneyPageRoutingModule
+    MoneyPageRoutingModule,
+    TranslateModule
   ],
   declarations: [MoneyPage]
 })

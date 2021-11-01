@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -9,8 +10,18 @@ export class SharedDataService {
   private tabTitle: string = '';
   private tabTitleSub$ = new Subject<string>();
   private backButtonEvent$ = new Subject<boolean>();
+  private langStr$ = new Subject<string>()
 
-  constructor() { }
+  constructor(private translate: TranslateService) { }
+
+
+  translate$(): Observable<string>{
+    return this.langStr$.asObservable()
+  }
+
+  updateLang(){
+    this.langStr$.next(this.translate.currentLang)
+  }
 
   getTabTitle(): string{
     return this.tabTitle;

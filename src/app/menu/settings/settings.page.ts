@@ -37,6 +37,7 @@ export class SettingsPage implements OnInit {
     const value: string = event.detail.value;
     this.translate.use(value)
     this.storage.set('lang', value)
+    this.sharedData.updateLang()
   }
 
   changeMode(){

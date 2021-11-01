@@ -5,10 +5,22 @@
         "about": "About"
     },
     "home": {
-        "title": "Home"
+        "title": "Home",
+        "noActiveCycle": "No active cycle",
+        "startNewCycle": "Start new cycle"
     },
     "money":{
-        "title": "Manage"
+        "cancel": "Cancel",
+        "select": "Select",
+        "title": "Manage",
+        "newCycle": "New Cycle",
+        "closeCycle": "Close Cycle",
+        "expense": "Expense",
+        "income": "Income",
+        "areYouSure": "Are you sure?",
+        "cambiarFecha": "Change Date",
+        "closingDate": "Closing Date",
+        "confirm": "Confirm"
     },
     "detail": {
         "title": "Details"
@@ -39,5 +51,19 @@
         "newVersion": "New version",
         "notNow": "Not now",
         "newUpdate": "New Update ⭐"
+    },
+    "date": {
+        "january": "January",
+        "february": "February",
+        "march": "March",
+        "april": "April",
+        "may": "May",
+        "june": "June",
+        "july": "July",
+        "august": "August",
+        "september": "September",
+        "october": "October",
+        "november": "November",
+        "december": "December"
     }
 }

@@ -25,16 +25,23 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+    this.sharedData.translate$().subscribe(lang => {
+      this.dateLanguage(lang)
+    })
   }
   
   ionViewWillEnter() {
-    this.formatedDate =  this.translate.currentLang == 'es' ? moment(this.date).locale('es').format('dddd DD MMM YYYY') : moment(this.date).locale('en').format('dddd MMM DD YYYY')
+    this.dateLanguage(this.translate.currentLang)
     this.sharedData.setTabTitle(this.tabTitle)
   }
 
   tabNav(tabName: string, states: any = null){
     this.router.navigate(['tabs',tabName], {state: states})
 
+  }
+
+  dateLanguage(lang: string){
+    this.formatedDate =  lang == 'es' ? moment(this.date).locale('es').format('dddd DD MMM YYYY') : moment(this.date).locale('en').format('dddd MMM DD YYYY')
   }
 
 }

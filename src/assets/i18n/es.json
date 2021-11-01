@@ -5,10 +5,22 @@
         "about": "Información"
     },
     "home": {
-        "title": "Inicio"
+        "title": "Inicio",
+        "noActiveCycle": "No tienes un ciclo activo",
+        "startNewCycle": "Empezar nuevo ciclo"
     },
     "money":{
-        "title": "Gestionar"
+        "cancel":"Cancelar",
+        "select": "Elegir",
+        "newCycle": "Nuevo Ciclo",
+        "title": "Gestionar",
+        "closeCycle": "Cerrar Ciclo",
+        "expense": "Gasto",
+        "income": "Ingreso",
+        "areYouSure": "¿Estás seguro?",
+        "cambiarFecha": "Cambiar Fecha",
+        "closingDate": "Fecha de Cierre",
+        "confirm": "Confirmar"
     },
     "detail": {
         "title": "Detalles"
@@ -31,7 +43,7 @@
         "spanish": "Español",
         "english": "Inglés",
         "selectLang":"Elige un idioma",
-        "cancel": "Cacelar"
+        "cancel": "Cancelar"
     },
     "about": {
         "appInfo": "Aplicación",
@@ -42,5 +54,19 @@
         "exit": "Salir",
         "cancel": "Cancelar",
         "exitApp": "¿Deseas salir?"
+    },
+    "date": {
+        "january": "Enero",
+        "february": "Febrero",
+        "march": "Marzo",
+        "april": "Abril",
+        "may": "Mayo",
+        "june": "Junio",
+        "july": "Julio",
+        "august": "Agosto",
+        "september": "Septiembre",
+        "october": "Octubre",
+        "november": "Noviembre",
+        "december": "Diciembre"
     }
 }

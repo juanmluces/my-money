@@ -1,3 +1,39 @@
 <ion-content>
+	<div class="buttons-container">
+		<ng-container *ngIf="currentCycle" >
+			<ion-button (click)="closeCycle()" size="large" fill="clear" color="danger" expand="block">
+				<ion-icon slot="start" name="close-circle-outline"></ion-icon>
+				{{ 'money.closeCycle' | translate }}
+			</ion-button>
+			<ion-button size="large" color="light" expand="block">
+				{{ 'money.expense' | translate }}
+			</ion-button>
+			<ion-button size="large" color="primary" expand="block">
+				{{ 'money.income' | translate }}
+			</ion-button>
+		</ng-container>
+		<ion-button  *ngIf="!currentCycle" (click)="openDatepicker(true)" size="large" color="primary" expand="block">
+			{{ 'money.newCycle' | translate }}
+		</ion-button>
+		<ion-datetime  #datePicker class="hidden"
+			[pickerFormat]="translate.currentLang == 'es' ? 'DD MMMM YYYY' : ' MMMM DD YYYY'" 
+			[pickerOptions]="customPickerOptions"
+			[doneText]="'money.select' | translate" [cancelText]="'money.cancel' | translate" 
+			[monthNames]="[
+			'date.january' | translate,
+			'date.february' | translate,
+			'date.march' | translate,
+			'date.april' | translate, 
+			'date.may' | translate, 
+			'date.june' | translate, 
+			'date.july' | translate, 
+			'date.august' | translate,
+			'date.september' | translate, 
+			'date.october' | translate,
+			'date.november' | translate, 
+			'date.december' | translate
+			]">
+		</ion-datetime>
+	</div>
 
 </ion-content>
