@@ -61,7 +61,8 @@ export class MoneyPage implements OnInit {
 
   getActiveCycle(){
     const activeCycle = this.moneyCycles.getActiveCycle()
-    if(activeCycle) this.currentCycle = activeCycle
+    if(activeCycle) return this.currentCycle = activeCycle
+    this.currentCycle = null;
   }
 
   openDatepicker(start: boolean = false){
