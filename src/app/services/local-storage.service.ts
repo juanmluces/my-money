@@ -28,5 +28,10 @@ export class LocalStorageService {
     return await this._storage?.get(key)
   }
 
+  deleteData(){
+    this._storage.clear()
+    
+  }
+
 
 }

@@ -80,7 +80,6 @@ export class MoneyPage implements OnInit {
 
     this.currentCycle = new MoneyCycle({startDate: moment(stringDate).format()})
     this.moneyCycles.startCycle(this.currentCycle)
-    console.log(JSON.stringify(this.currentCycle));
     
     
   }

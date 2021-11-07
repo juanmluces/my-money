@@ -31,6 +31,8 @@ export class HomePage implements OnInit {
      this.updateDate = !this.updateDate
     });
     this.moneyCycles.cycleChanges$().subscribe(chang => {
+
+      
       this.getActiveCycle()
     })
     this.getActiveCycle()
@@ -47,7 +49,8 @@ export class HomePage implements OnInit {
   }
   getActiveCycle(){
     const activeCycle = this.moneyCycles.getActiveCycle()
-    if(activeCycle) this.currentCycle = activeCycle
+    if(activeCycle) return this.currentCycle = activeCycle
+    this.currentCycle = null;
   }
 
 }

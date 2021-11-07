@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { MoneyCycleService } from 'src/app/services/money-cycle.service';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 
 @Component({
@@ -17,7 +19,9 @@ export class SettingsPage implements OnInit {
   constructor(
     private sharedData: SharedDataService,
     public translate: TranslateService,
-    private storage: LocalStorageService
+    private storage: LocalStorageService,
+    private alertCtrl: AlertController,
+    private moneyCycle: MoneyCycleService
   ) {
     this.pageTitle = 'menu.settings'
     this.darkMode = false;
@@ -54,5 +58,37 @@ export class SettingsPage implements OnInit {
     
   }
 
+  async deleteData(){
+   await this.presentAlertConfirm()
+  }
+
+
+  private async presentAlertConfirm() {
+
+    // const exitTrans = await this.translate.get('closeApp.exit').toPromise()
+    // const exitQuestionTrans = await this.translate.get('closeApp.exitApp').toPromise()
+    // const cacelTrans = await this.translate.get('closeApp.cancel').toPromise()
+
+    const alert = await this.alertCtrl.create({
+      header: "¿Estás seguro?",
+      message: 'Se borrarán todos los datos',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+        }, {
+          text: 'Confirmar',
+          cssClass: 'exit-button',
+          handler: () => {
+            this.storage.deleteData()
+            this.moneyCycle.deleteData()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
   
 }

@@ -33,19 +33,16 @@ export class MoneyCycleService {
   }
 
   setAllCycles(params: Array<MoneyCycle>){
-   
-
       this.userCycles = params;
       const activeCycle = this.userCycles.find(cycle => !cycle.isClosed)    
       if(activeCycle) this.activeCycle = activeCycle;
       this.cycles$.next(true)
-  
-  
   }
 
   startCycle(cycle: MoneyCycle){
     this.activeCycle = cycle;
     this.userCycles.push(this.activeCycle)
+    this.setAllCycles(this.userCycles)
     this.storage.set('cycles', this.userCycles)
   }
 
@@ -54,6 +51,7 @@ export class MoneyCycleService {
     this.activeCycle.isClosed = true;
     this.userCycles[index] = this.activeCycle;
     this.storage.set('cycles', this.userCycles)
+    this.activeCycle = null;
     this.setAllCycles(this.userCycles);
   }
 
@@ -84,5 +82,11 @@ export class MoneyCycleService {
       moneyCycle.totalIncome = income;
       moneyCycle.totalExpenses = expenses
     
+  }
+
+  deleteData(){
+    this.userCycles = []
+    this.activeCycle = null;
+    this.setAllCycles(this.userCycles)   
   }
 }
