@@ -1,18 +1,42 @@
 <ion-content>
 	<ion-item-divider class="date-time">
-		<h3>{{ formatedDate | titlecase }}</h3>
+		<h3 *ngIf="updateDate">{{ date | customDate }}</h3>
+		<h3 *ngIf="!updateDate">{{ date | customDate }}</h3>
+		<ion-badge *ngIf="currentCycle" slot="end" [color]="currentCycle.totalBalance < 0 ? 'danger' : 'primary'">{{ currentCycle.totalBalance || 0}}€</ion-badge>
 	</ion-item-divider>
-	<div class="card-container">
-  	<ion-card>
-      <ion-item>
-        <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
-		<ion-label class="no-active-cycle">{{ 'home.noActiveCycle' | translate }}</ion-label>
+	<ng-container *ngIf="currentCycle">
+		<ion-card *ngFor="let movement of currentCycle.movements" class="movements"  >
+		<ion-item >
+			<ion-icon [color]="movement.expense ? 'danger' :'primary'" 
+				[name]="movement.expense ?  'remove-circle' : 'add-circle'" 
+				slot="start">
+			</ion-icon>
+			<ion-label>
+				<ion-text>
+        <h3>{{ movement.description }}</h3>
+      </ion-text>
+      <p>{{ movement.movementDate | customDate }}</p>
+      <ion-text [color]="movement.expense ? 'danger' :'primary'" >
+        <p>{{ movement.amount }}€</p>
+      </ion-text>
+		</ion-label>
+		</ion-item>
+	</ion-card>
+</ng-container>
+
+
+		<div *ngIf="!currentCycle" class="card-container">
+		<ion-card >
+			<ion-item>
+				<ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+				<ion-label class="no-active-cycle">{{ 'home.noActiveCycle' | translate }}</ion-label>
         <ion-icon class="item-right-margin" slot="end" name=""></ion-icon> 
     	</ion-item>
   	</ion-card>
 		<ion-button (click)="tabNav('money', {newCicle: true})" expand="block" fill="clear" shape="round">
 			{{ 'home.startNewCycle' | translate }}
 		</ion-button>
+
   </div>
 
 </ion-content>

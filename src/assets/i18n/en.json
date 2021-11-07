@@ -65,5 +65,14 @@
         "october": "October",
         "november": "November",
         "december": "December"
+    },
+    "expenses": {
+        "save": "Save",
+        "newExpense": "New Expense",
+        "newIncome": "New Income",
+        "description": "Description",
+        "amount": "Amount",
+        "date": "Date",
+        "movementSaved": "Movement added!"
     }
 }

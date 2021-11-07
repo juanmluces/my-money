@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar [color]="expense ? 'danger' : 'primary'">
+    <ion-title>{{ modalTitle | translate | titlecase}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    
+    <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+      <ion-item>
+        <ion-label position="floating">{{ 'expenses.description' | translate }}</ion-label>
+      <ion-input formControlName="description"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{ 'expenses.amount' | translate }} €</ion-label>
+      <ion-input formControlName="amount" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{ 'expenses.date' | translate }}</ion-label>
+      <ion-input (click)="datePicker.open()" [value]="selectedDate | customDate" type="text" placeholder="Awesome Input"></ion-input>
+    </ion-item>
+    
+    <ion-button [disabled]="formGroup.invalid" type="submit" size="large" color="primary" expand="block">
+      {{ 'expenses.save' | translate }}
+    </ion-button>
+  </form>
+</ion-card>
+<ion-datetime  #datePicker class="hidden"
+[pickerFormat]="translate.currentLang == 'es' ? 'DD MMMM YYYY' : ' MMMM DD YYYY'" 
+[pickerOptions]="customPickerOptions"
+[doneText]="'money.select' | translate" [cancelText]="'money.cancel' | translate" 
+[monthNames]="[
+'date.january' | translate,
+'date.february' | translate,
+'date.march' | translate,
+'date.april' | translate, 
+'date.may' | translate, 
+'date.june' | translate, 
+'date.july' | translate, 
+'date.august' | translate,
+'date.september' | translate, 
+'date.october' | translate,
+'date.november' | translate, 
+'date.december' | translate
+]">
+</ion-datetime>
+
+</ion-content>
+<ion-footer no-border>
+  <ion-toolbar>
+    <ion-button fill="clear"  slot="end" (click)="goBack()">
+      <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+      <ion-label>{{'detalle.goBack' | translate}}</ion-label>
+    </ion-button>
+ 
+  </ion-toolbar>
+</ion-footer>

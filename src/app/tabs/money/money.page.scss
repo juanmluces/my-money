@@ -1,9 +1,14 @@
+.date-time{
+    height: 4rem;
+}
+
+
 .buttons-container{
     
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
+    height: calc(100% - 8rem);
     width: 90%;
     max-width: 400px;
     margin: auto;

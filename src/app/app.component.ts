@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from './services/local-storage.service';
+import { MoneyCycleService } from './services/money-cycle.service';
 import { SharedDataService } from './services/shared-data.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class AppComponent implements OnInit{
     private platform: Platform,
     private router: Router,
     public alertController: AlertController,
-    private stroage: LocalStorageService
+    private stroage: LocalStorageService,
+    private moneyCycle: MoneyCycleService
   ) {
     this.initializeApp();
     this.translate.setDefaultLang('es');
@@ -38,12 +40,14 @@ export class AppComponent implements OnInit{
     this.changeDarkMode();
     const lang = await this.stroage.get('lang') || this.translate.getDefaultLang()
     this.translate.use(lang)
+    const userCycles = await this.stroage.get('cycles')
+    if(userCycles) this.moneyCycle.setAllCycles(userCycles)
 
     this.platform.backButton.subscribeWithPriority(0, async () => {
     
-    this.sharedData.backButtonPressed(true)
-    setTimeout(()=>{this.sharedData.backButtonPressed(false)}, 0)
-    const url = this.router.url    
+      this.sharedData.backButtonPressed(true)
+      setTimeout(()=>{ this.sharedData.backButtonPressed(false)}, 0)
+      const url = this.router.url    
       if(url == "/tabs/home"){
         await this.presentAlertConfirm()
       } else{

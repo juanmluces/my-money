@@ -11,8 +11,17 @@ export class SharedDataService {
   private tabTitleSub$ = new Subject<string>();
   private backButtonEvent$ = new Subject<boolean>();
   private langStr$ = new Subject<string>()
+  private newCycleBool$ = new Subject<boolean>();
 
   constructor(private translate: TranslateService) { }
+
+
+  newCycle$(): Observable<boolean>{
+    return this.newCycleBool$.asObservable()
+  }
+  createNewCycle(): void{
+    this.newCycleBool$.next(true)
+  }
 
 
   translate$(): Observable<string>{

@@ -1,14 +1,18 @@
 <ion-content>
+	<ion-item-divider *ngIf="currentCycle" class="date-time" >
+		<h3 *ngIf="updateDate">{{ currentCycle.startDate| customDate }}</h3>
+		<h3 *ngIf="!updateDate">{{ currentCycle.startDate| customDate }}</h3>
+	</ion-item-divider>
 	<div class="buttons-container">
 		<ng-container *ngIf="currentCycle" >
 			<ion-button (click)="closeCycle()" size="large" fill="clear" color="danger" expand="block">
 				<ion-icon slot="start" name="close-circle-outline"></ion-icon>
 				{{ 'money.closeCycle' | translate }}
 			</ion-button>
-			<ion-button size="large" color="light" expand="block">
+			<ion-button (click)="mostrarModal(true)" size="large" color="light" expand="block">
 				{{ 'money.expense' | translate }}
 			</ion-button>
-			<ion-button size="large" color="primary" expand="block">
+			<ion-button (click)="mostrarModal(false)" size="large" color="primary" expand="block">
 				{{ 'money.income' | translate }}
 			</ion-button>
 		</ng-container>

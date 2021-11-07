@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MoneyCycle } from 'src/app/models/moneyCycle.model';
+import { MoneyCycleService } from 'src/app/services/money-cycle.service';
 import { SharedDataService } from 'src/app/services/shared-data.service';
-import * as moment from 'moment'
-import { TranslateService } from '@ngx-translate/core';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -14,34 +13,41 @@ export class HomePage implements OnInit {
   tabTitle = 'home.title'
   date: Date;
   formatedDate: string;
+  updateDate: boolean;
+  currentCycle: MoneyCycle;
 
   constructor(
     private sharedData: SharedDataService,
     private router: Router,
-    private translate: TranslateService
+    private moneyCycles: MoneyCycleService
   ) { 
     this.date = new Date()
-    this.formatedDate = ''
+    this.formatedDate = '';
+    this.updateDate = false
   }
 
   ngOnInit() {
     this.sharedData.translate$().subscribe(lang => {
-      this.dateLanguage(lang)
+     this.updateDate = !this.updateDate
+    });
+    this.moneyCycles.cycleChanges$().subscribe(chang => {
+      this.getActiveCycle()
     })
+    this.getActiveCycle()
   }
   
   ionViewWillEnter() {
-    this.dateLanguage(this.translate.currentLang)
     this.sharedData.setTabTitle(this.tabTitle)
   }
 
   tabNav(tabName: string, states: any = null){
-    this.router.navigate(['tabs',tabName], {state: states})
+    this.sharedData.createNewCycle()
+    this.router.navigate(['tabs',tabName], { queryParams: states})
 
   }
-
-  dateLanguage(lang: string){
-    this.formatedDate =  lang == 'es' ? moment(this.date).locale('es').format('dddd DD MMM YYYY') : moment(this.date).locale('en').format('dddd MMM DD YYYY')
+  getActiveCycle(){
+    const activeCycle = this.moneyCycles.getActiveCycle()
+    if(activeCycle) this.currentCycle = activeCycle
   }
 
 }

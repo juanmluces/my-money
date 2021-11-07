@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MoneyPageRoutingModule } from './money-routing.module';
-
-import { MoneyPage } from './money.page';
+import { ExpensesModal } from './expenses.modal';
+import { ExpensesModalRoutingModule } from './expenses-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { PipesModule } from 'src/app/pipes/pipes.module';
-import { ExpensesModalModule } from 'src/app/modals/expenses/expenses.module';
+
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MoneyPageRoutingModule,
+    ExpensesModalRoutingModule,
     TranslateModule,
     PipesModule,
-    ExpensesModalModule
+    ReactiveFormsModule
   ],
-  declarations: [MoneyPage]
+  declarations: [ExpensesModal]
 })
-export class MoneyPageModule {}
+export class ExpensesModalModule {}

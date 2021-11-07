@@ -68,5 +68,14 @@
         "october": "Octubre",
         "november": "Noviembre",
         "december": "Diciembre"
+    },
+    "expenses": {
+        "save": "Guardar",
+        "newExpense": "Nuevo Gasto",
+        "newIncome": "Nuevo Ingreso",
+        "description": "Descripción",
+        "amount": "Importe",
+        "date": "Fecha",
+        "movementSaved": "¡Movimiento añadido!"
     }
 }

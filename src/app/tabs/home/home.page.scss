@@ -1,5 +1,10 @@
 .date-time{
     height: 4rem;
+    position: sticky;
+    top: 0;
+    ion-badge{
+        margin-right: 1rem;
+    }
 }
 
 div.card-container{
@@ -9,8 +14,10 @@ div.card-container{
     align-items: center;
     justify-content: center;
     & ion-item{
+        margin-bottom: 1em;
         & .no-active-cycle{
             text-align: center;
+            font-size: 1.5rem;
         }
         & .item-right-margin{
             width: 2rem;
@@ -23,3 +30,17 @@ div.card-container{
     }
 }
 
+
+.movements{
+    ion-icon{
+        font-size: 2rem;
+    }
+    h3{
+        font-size: 2rem;
+        margin-bottom: 0.5em;
+    }
+    p{
+        font-size: 1.5rem;
+        margin-bottom: 0.5em;
+    }
+}

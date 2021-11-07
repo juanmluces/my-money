@@ -3,8 +3,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import * as moment from 'moment'
 import { MoneyCycle } from 'src/app/models/moneyCycle.model';
-import { AlertController, IonDatetime } from '@ionic/angular';
+import { AlertController, IonDatetime, ModalController, ToastController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core';
+import { MoneyCycleService } from 'src/app/services/money-cycle.service';
+import { ExpensesModal } from 'src/app/modals/expenses/expenses.modal';
 
 @Component({
   selector: 'app-money',
@@ -15,32 +17,51 @@ export class MoneyPage implements OnInit {
 
   tabTitle: string;
   transMonths: Array<string>;
-  currentCycle: boolean;
   customPickerOptions: PickerOptions;
   startCycle: boolean;
+  currentCycle: MoneyCycle;
+  updateDate: boolean;
 
   @ViewChild('datePicker', {static: true}) datePicker: IonDatetime
 
   constructor(
     private sharedData: SharedDataService,
     public translate: TranslateService,
-    private alertCtr: AlertController
+    private alertCtr: AlertController,
+    private moneyCycles: MoneyCycleService,
+    private modalCtrl: ModalController,
+    public toastCtrl: ToastController
   ) { 
     this.tabTitle = 'money.title'
-    this.currentCycle = false
+    this.currentCycle = null
     this.setDatepickerOptions()
+    this.updateDate = false
    
 
   }
 
   async ngOnInit() {
-    this.sharedData.translate$().subscribe(lang => this.setDatepickerOptions())
+    this.sharedData.translate$().subscribe(() => {
+      this.setDatepickerOptions()
+      this.updateDate = !this.updateDate
+    })
+    this.sharedData.newCycle$().subscribe(data => {if(data) this.openDatepicker(true)}) 
+    this.moneyCycles.cycleChanges$().subscribe(chang => {
+      this.getActiveCycle()
+    })
+    this.getActiveCycle()
+    
     
  
   }
 
   ionViewWillEnter(){
     this.sharedData.setTabTitle(this.tabTitle)
+  }
+
+  getActiveCycle(){
+    const activeCycle = this.moneyCycles.getActiveCycle()
+    if(activeCycle) this.currentCycle = activeCycle
   }
 
   openDatepicker(start: boolean = false){
@@ -57,10 +78,10 @@ export class MoneyPage implements OnInit {
       return
     }
 
-    const moneyCycle = new MoneyCycle({startDate: moment(stringDate).format('DD/MM/YYYY')})
-    console.log(JSON.stringify({newCycle: moneyCycle}));
+    this.currentCycle = new MoneyCycle({startDate: moment(stringDate).format()})
+    this.moneyCycles.startCycle(this.currentCycle)
+    console.log(JSON.stringify(this.currentCycle));
     
-    this.currentCycle = true;
     
   }
 
@@ -122,7 +143,40 @@ export class MoneyPage implements OnInit {
 
 
   cycleClosed(){
-    this.currentCycle = false;
+    this.moneyCycles.closeCurrentCycle()
+    this.currentCycle = null;
   }
+
+  async mostrarModal(expense: boolean = false){
+
+    const modal = await this.modalCtrl.create({
+      component: ExpensesModal,
+      componentProps: {
+        expense
+      }
+    });
+    await modal.present();
+
+
+    // const {data} = await modal.onDidDismiss();
+    const {data} = await modal.onWillDismiss();
+    if(data['movementAdded']) await this.presentToast()
+   
+  
+
+
+  }
+
+  async presentToast() {
+    const trans = await this.translate.get('expenses.movementSaved').toPromise()
+    const toast = await this.toastCtrl.create({
+      message: trans,
+      duration: 2000,
+      color: 'primary',
+    });
+    toast.present();
+  }
+
+  
  
 }
